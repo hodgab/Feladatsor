@@ -1,17 +1,22 @@
-// App.tsx
-
 import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import TicTacToe from '../src/components/TicTacToe/TicTacToe';
+import SavedGames from '../src/components/SavedGames/SavedGames';
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Tic Tac Toe Game</h1>
-        <TicTacToe />
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <h1>Tic Tac Toe Game</h1>
+          <Routes>
+            <Route path="/" Component={TicTacToe}/>
+            <Route path="/saved-games" Component={SavedGames} />
+          </Routes>
+        </header>
+      </div>
+    </Router>
   );
 }
 

@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import "./TicTacToe.css";
+import SaveForm from '../saveForm/SaveForm';
 
 interface TicTacToeState {
   boardSize: number;
@@ -152,9 +153,37 @@ class TicTacToe extends Component<{}, TicTacToeState> {
           </div>
         </div>
         {resetButton}
+        <SaveForm onSave={this.handleSave}/>
       </div>
     );
   }
+
+  handleSave = (tableName: string) => {
+    const { board, xIsNext, boardSize } = this.state;
+    const boardString = board.map(square => square ? (square === 'X' ? '1' : '2') : '0').join('');
+    const data = {
+      name: tableName,
+      board: boardString
+    };
+  
+    fetch('http://localhost:5000/boards', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Success:', data);
+      // Add itt kezeld a sikeres mentést, például jelentsd ki a felhasználónak
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      // Add itt kezeld a hibát, például jelentsd ki a felhasználónak
+    });
+  }
+  
   
   handleReset() {
     this.setState({
