@@ -9,7 +9,8 @@ function App() {
     <Router>
       <div className="App">
         <header className="App-header">
-          <h1>Tic Tac Toe Game</h1>
+          <h1>Tic Tac Toe Játék</h1>
+          {/* Útvonalak meghatározása a különböző lapokhoz.*/}
           <Routes>
             <Route path="/" Component={TicTacToe}/>
             <Route path="/saved-games" Component={SavedGames} />

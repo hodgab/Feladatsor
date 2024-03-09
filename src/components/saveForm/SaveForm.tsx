@@ -18,7 +18,7 @@ const SaveForm: React.FC<SaveFormProps> = ({ onSave }) => {
     <div>
       <input 
         type="text" 
-        placeholder="Table name" 
+        placeholder="Játék neve" 
         value={tableName} 
         onChange={(e) => setTableName(e.target.value)} 
       />

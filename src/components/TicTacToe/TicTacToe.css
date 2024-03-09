@@ -1,18 +1,56 @@
-.board-wrapper {
-    
-    margin: 0 auto;
-    
-}
-
 .board {
     display: grid;
-    grid-template-columns: repeat(5, minmax(50px, 1fr)); /* Legalább 50px széles oszlopok, maximum 1 frakciós egység */
+    grid-template-columns: repeat(3, minmax(50px, 1fr)); /* A táblaméret alapján 3 oszlopot hoz létre */
     grid-auto-rows: minmax(50px, auto); /* Legalább 50px magas sorok */
-    margin: 0 auto;
+    margin: 30px auto;
     text-align: center;
+    color: black;
+    font-family: 'Courier New', cursive;
+    display: flex;
+    justify-content: center;
 }
-.board div{
-    border: solid 1px black;
 
+@media (min-width: 500px) {
+    /* Ha a tábla szélessége legalább 500px, akkor 4 oszlopot használunk */
+    .board {
+        grid-template-columns: repeat(4, minmax(50px, 1fr));
+    }
 }
-  
+
+@media (min-width: 700px) {
+    /* Ha a tábla szélessége legalább 700px, akkor 5 oszlopot használunk */
+    .board {
+        grid-template-columns: repeat(5, minmax(50px, 1fr));
+    }
+}
+
+@media (min-width: 900px) {
+    /* Ha a tábla szélessége legalább 900px, akkor 6 oszlopot használunk */
+    .board {
+        grid-template-columns: repeat(6, minmax(50px, 1fr));
+    }
+}
+
+@media (min-width: 1100px) {
+    /* Ha a tábla szélessége legalább 1100px, akkor 7 oszlopot használunk */
+    .board {
+        grid-template-columns: repeat(7, minmax(50px, 1fr));
+    }
+}
+
+.square{
+    border: solid 1px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 800;
+}
+.board-p{
+    margin-right: 20px;
+}
+.option-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

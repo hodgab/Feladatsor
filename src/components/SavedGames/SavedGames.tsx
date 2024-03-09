@@ -52,7 +52,7 @@ const SavedGames = () => {
   }, []);
 
   const handleDelete = (id: number) => {
-    fetch(`http://localhost:5000/delete/${id}`, {
+    fetch(`http://localhost:5000/boards/${id}`, {
       method: 'DELETE',
     })
       .then(response => {
@@ -60,7 +60,7 @@ const SavedGames = () => {
           const updatedGames = savedGames.filter(game => game.id !== id);
           setSavedGames(updatedGames);
         } else {
-          console.error('Delete request failed');
+          console.error('Delete request failed', id);
         }
       })
       .catch(error => console.error('Error:', error));
@@ -88,7 +88,7 @@ const SavedGames = () => {
 
   return (
     <div>
-      <h2>Saved Games</h2>
+      <h2>Mentett játékok</h2>
       <div className="card-container">
         {savedGames.map(savedGame => (
           <Card

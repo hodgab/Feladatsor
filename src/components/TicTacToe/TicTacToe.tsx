@@ -54,7 +54,7 @@ class TicTacToe extends Component<{}, TicTacToeState> {
           }
         } else {
           currentSymbol = symbol;
-          count = symbol !== null ? 1 : 0; // Modifying this line to reset count for null symbols
+          count = symbol !== null ? 1 : 0;
         }
       }
     }
@@ -62,36 +62,23 @@ class TicTacToe extends Component<{}, TicTacToeState> {
     return null;
   }
   
-  
-  
-  
-   
-  
-
   generateLines() {
     const boardSize = this.state.boardSize;
     const lines: number[][] = [];
-    // Rows
+    // Sorok
     for (let i = 0; i < boardSize; i++) {
-      for (let j = 0; j <= boardSize - 4; j++) {
-        lines.push(Array.from({ length: 4 }, (_, k) => i * boardSize + j + k));
-      }
+      lines.push(Array.from({ length: boardSize }, (_, j) => i * boardSize + j));
     }
-    // Columns
-    for (let i = 0; i <= boardSize - 4; i++) {
-      for (let j = 0; j < boardSize; j++) {
-        lines.push(Array.from({ length: 4 }, (_, k) => (i + k) * boardSize + j));
-      }
+    // Oszlopok
+    for (let j = 0; j < boardSize; j++) {
+      lines.push(Array.from({ length: boardSize }, (_, i) => i * boardSize + j));
     }
-    // Diagonals
-    for (let i = 0; i <= boardSize - 4; i++) {
-      for (let j = 0; j <= boardSize - 4; j++) {
-        lines.push(Array.from({ length: 4 }, (_, k) => (i + k) * boardSize + j + k));
-        lines.push(Array.from({ length: 4 }, (_, k) => (i + k) * boardSize + j + (3 - k)));
-      }
-    }
+    // Átlók
+    lines.push(Array.from({ length: boardSize }, (_, i) => i * boardSize + i));
+    lines.push(Array.from({ length: boardSize }, (_, i) => i * boardSize + (boardSize - 1 - i)));
     return lines;
   }
+  
 
   handleBoardSizeChange(size: number) {
     this.setState({
@@ -133,19 +120,19 @@ class TicTacToe extends Component<{}, TicTacToeState> {
   render() {
     const boardSizeOptions = [3, 4, 5, 6, 7];
     const winner = this.state.winner;
-    const status = winner ? `Winner: ${winner}` : `Next player: ${this.state.xIsNext ? 'X' : 'O'}`;
+    const status = winner ? `Győztes: ${winner}` : `Következő: ${this.state.xIsNext ? 'X' : 'O'}`;
     const resetButton = winner ? <button onClick={() => this.handleReset()}>Újra</button> : null;
   
     return (
       <div className="board-wrapper">
         <div className="status">{status}</div>
-        <div>
-          Select board size:
+        <div className='option-wrapper'>
+          <p className='board-p'>Táblaméret:</p>
           <select value={this.state.boardSize} onChange={(e) => this.handleBoardSizeChange(parseInt(e.target.value))}>
             {boardSizeOptions.map(size => <option value={size}>{size}x{size}</option>)}
           </select>
         </div>
-        <div className="board-wrapper">
+        <div className="board-outer">
           <div className="board-container">
             <div className="board">
               {this.renderBoard()}
@@ -176,11 +163,10 @@ class TicTacToe extends Component<{}, TicTacToeState> {
     .then(response => response.json())
     .then(data => {
       console.log('Success:', data);
-      // Add itt kezeld a sikeres mentést, például jelentsd ki a felhasználónak
     })
     .catch((error) => {
       console.error('Error:', error);
-      // Add itt kezeld a hibát, például jelentsd ki a felhasználónak
+      
     });
   }
   
