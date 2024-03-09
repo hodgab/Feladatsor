@@ -1,0 +1,18 @@
+.board-wrapper {
+    
+    margin: 0 auto;
+    
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(50px, 1fr)); /* Legalább 50px széles oszlopok, maximum 1 frakciós egység */
+    grid-auto-rows: minmax(50px, auto); /* Legalább 50px magas sorok */
+    margin: 0 auto;
+    text-align: center;
+}
+.board div{
+    border: solid 1px black;
+
+}
+  
